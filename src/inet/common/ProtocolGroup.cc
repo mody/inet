@@ -149,6 +149,9 @@ static const ProtocolGroup::Protocols udpProtocols {
     { 11111, &Protocol::unknown }, // INET specific non-standard protocol
 };
 
+static const ProtocolGroup::Protocols udpliteProtocols {
+};
+
 static const ProtocolGroup::Protocols tcpProtocols {
     { 21, &Protocol::ftp },
     { 22, &Protocol::ssh },
@@ -198,6 +201,12 @@ ProtocolGroup *ProtocolGroup::getUdpProtocolGroup()
 {
     static int handle = cSimulationOrSharedDataManager::registerSharedVariableName("inet::ProtocolGroup::udp");
     return &getSimulationOrSharedDataManager()->getSharedVariable<ProtocolGroup>(handle, "udp", udpProtocols);
+}
+
+ProtocolGroup *ProtocolGroup::getUdpliteProtocolGroup()
+{
+    static int handle = cSimulationOrSharedDataManager::registerSharedVariableName("inet::ProtocolGroup::udplite");
+    return &getSimulationOrSharedDataManager()->getSharedVariable<ProtocolGroup>(handle, "udplite", udpliteProtocols);
 }
 
 } // namespace inet
