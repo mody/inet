@@ -27,6 +27,7 @@ enum IpProtocolId
     IP_PROT_XTP = 36;
     IP_PROT_IPv6 = 41;
     IP_PROT_RSVP = 46;
+    IP_PROT_DSR  = 48;
     IP_PROT_ESP = 50;
     IP_PROT_AH = 51;
     IP_PROT_IPv6_ICMP = 58;
@@ -37,7 +38,7 @@ enum IpProtocolId
     IP_PROT_PIM = 103;
     IP_PROT_VRRP = 112;
     IP_PROT_SCTP = 132;
-    IP_PROT_DSR  = 48;
+    IP_PROT_UDPLITE = 136;
     IP_PROT_MANET = 138;
 
     IP_PROT_IPv6EXT_HOP = 0;       // Hop-by-hop option header.
