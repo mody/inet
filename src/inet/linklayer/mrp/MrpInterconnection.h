@@ -55,7 +55,6 @@ protected:
     opp_component_ptr<NetworkInterface> interconnectionInterface = nullptr;
     int interconnectionPort;
 
-    //TODO simtime_t
     simtime_t inLinkChangeInterval;
     simtime_t inTopologyChangeInterval;
     simtime_t inLinkStatusPollInterval;
