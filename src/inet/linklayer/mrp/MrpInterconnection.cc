@@ -389,7 +389,7 @@ void MrpInterconnection::mauTypeChangeInd(int ringPort, LinkState linkState) {
                     EV_DETAIL << "Switching InState from AC_STAT1 to CHK_IC"
                                      << EV_FIELD(inNodeState) << EV_ENDL;
                     inTopologyState = CLOSED;
-                    emit(interconnectionStateChangedSignal, simTime().inUnit(SIMTIME_US));
+                    emit(interconnectionStateChangedSignal, simTime().inUnit(SIMTIME_US));  //TODO emit the state instead
                 } else if (inRole == INTERCONNECTION_CLIENT) {
                     inLinkChangeCount = inLinkMaxChange;
                     cancelEvent(inLinkDownTimer);
@@ -472,7 +472,7 @@ void MrpInterconnection::interconnTopologyChangeInd(MacAddress sourceAddress, si
         //it is not necessary to react after the first frame
         if (sequence > lastInTopologyId) {
             lastInTopologyId = sequence;
-            emit(receivedInChangeSignal, firstTLV->getInterval());
+            emit(receivedInChangeSignal, firstTLV->getInterval());  //TODO remove
             switch (inNodeState) {
             case AC_STAT1:
                 if (inRole == INTERCONNECTION_CLIENT) {
@@ -625,7 +625,7 @@ void MrpInterconnection::interconnLinkStatusPollInd(uint16_t inID, int ringPort,
         //it is not necessary to react after the first frame
         if (sequence > lastPollId) {
             lastPollId = sequence;
-            emit(receivedInStatusPollSignal, simTime().inUnit(SIMTIME_US));
+            emit(receivedInStatusPollSignal, simTime().inUnit(SIMTIME_US));  //TODO remove
             switch (inNodeState) {
             case AC_STAT1:
                 if (inRole == INTERCONNECTION_CLIENT) {
@@ -673,7 +673,7 @@ void MrpInterconnection::interconnTestInd(MacAddress sourceAddress, int ringPort
         int ringTime = simTime().inUnit(SIMTIME_MS) - firstTLV->getTimeStamp();
         auto lastInTestFrameSent = inTestFrameSent.find(sequence);
         if (lastInTestFrameSent != inTestFrameSent.end()) {
-            int64_t ringTimePrecise = simTime().inUnit(SIMTIME_US) - lastInTestFrameSent->second;
+            int64_t ringTimePrecise = simTime().inUnit(SIMTIME_US) - lastInTestFrameSent->second; //TODO simtime_t!
             emit(receivedInTestSignal, ringTimePrecise);
             EV_DETAIL << "InterconnectionRingTime" << EV_FIELD(ringTime)
                              << EV_FIELD(ringTimePrecise) << EV_ENDL;
@@ -808,7 +808,7 @@ void MrpInterconnection::setupInterconnTestReq() {
     packet3->insertAtBack(endTLV);
     MacAddress sourceAddress3 = getPortNetworkInterface(primaryRingPort)->getMacAddress();
     sendFrameReq(secondaryRingPort, MacAddress(MC_INTEST), sourceAddress3, priority, MRP_LT, packet3);
-    emit(inTestSignal, lastInTestFrameSent);
+    emit(inTestSignal, lastInTestFrameSent);  //TODO remove
 }
 
 void MrpInterconnection::interconnTopologyChangeReq(simtime_t time) {
@@ -865,7 +865,7 @@ void MrpInterconnection::setupInterconnTopologyChangeReq(simtime_t time) {
     } else {
         sendFrameReq(interconnectionPort, MacAddress(MC_INCONTROL), sourceAddress3, priority, MRP_LT, packet3);
     }
-    emit(inTopologyChangeSignal, simTime().inUnit(SIMTIME_US));
+    emit(inTopologyChangeSignal, simTime().inUnit(SIMTIME_US));  //TODO
 }
 
 void MrpInterconnection::interconnLinkChangeReq(LinkState linkState, simtime_t time) {
@@ -940,7 +940,7 @@ void MrpInterconnection::interconnLinkChangeReq(LinkState linkState, simtime_t t
     } else {
         sendFrameReq(interconnectionPort, MacAddress(MC_INCONTROL), sourceAddress3, priority, MRP_LT, packet3);
     }
-    emit(inLinkChangeSignal, simTime().inUnit(SIMTIME_US));
+    emit(inLinkChangeSignal, simTime().inUnit(SIMTIME_US)); //TODO remove
 }
 
 void MrpInterconnection::interconnLinkStatusPollReq(simtime_t time) {
@@ -1000,7 +1000,7 @@ void MrpInterconnection::setupInterconnLinkStatusPollReq() {
     packet3->insertAtBack(endTLV);
     MacAddress sourceAddress3 = getPortNetworkInterface(primaryRingPort)->getMacAddress();
     sendFrameReq(secondaryRingPort, MacAddress(MC_INCONTROL), sourceAddress3, priority, MRP_LT, packet3);
-    emit(inStatusPollSignal, simTime().inUnit(SIMTIME_US));
+    emit(inStatusPollSignal, simTime().inUnit(SIMTIME_US)); //TODO remove
 }
 
 void MrpInterconnection::inTransferReq(TlvHeaderType headerType, int ringPort, FrameType frameType, Packet *packet) {
