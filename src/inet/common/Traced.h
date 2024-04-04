@@ -14,21 +14,21 @@ namespace inet {
 
 /**
  * @brief A template class that wraps a variable of type T (usually an primitive type like int,
- * double, enum, etc.), and monitors its value for changes. On each change, the new value is
- * emitted in the specified simulation signal. This class is particularly useful for automatic
- * recording of state variables in a module.
+ * double, enum, etc.), and monitors its value for changes. On each change, the callback function
+ * is called with the old and the new value. This class is particularly useful for automatic
+ * logging or recording of state variables in a module.
  */
 template<typename T>
 class Traced {
   private:
     T value_;
-    cComponent *component_ = nullptr;
-    simsignal_t signal_ = SIMSIGNAL_NULL;
+    std::function<void(T,T)> callback_;
 
     void setValue(const T& newValue) {
+        T oldValue = value_;
         value_ = newValue;
-        if (signal_ != SIMSIGNAL_NULL)
-            component_->emit(signal_, newValue);
+        if (callback_)
+            callback_(oldValue, newValue);
     }
 
   public:
@@ -36,10 +36,31 @@ class Traced {
 
     Traced(const T& value) : value_(value) {}
 
-    // Set up target signal
-    void configure(cComponent *component, simsignal_t signal) {
-        component_ = component;
-        signal_ = signal;
+    Traced(const T& value, std::function<void(T,T)> callback) : value_(value), callback_(callback) {}
+
+    // Set callback function
+    void addCallback(std::function<void(T,T)> callback) {
+        if (!callback_)
+            callback_ = callback;
+        else
+            // chaining
+            callback_ = [=](T oldValue, T newValue) {
+                callback_(oldValue, newValue);
+                callback(oldValue, newValue);
+            };
+    }
+
+    // Set up to emit signal on changes
+    void addEmitCallback(cComponent *component, simsignal_t signal) {
+        auto callback = [=](T oldValue, T newValue) {
+            if (oldValue != newValue)
+                component->emit(signal, newValue);
+        };
+        addCallback(callback);
+    }
+
+    void removeCallbacks() {
+        callback_ = nullptr;
     }
 
     // Overload assignment operator
