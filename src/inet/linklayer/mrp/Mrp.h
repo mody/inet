@@ -23,9 +23,7 @@ namespace inet {
  * Implements the base part of the MRP protocol, i.e. roles MRC, MRM and MRA.
  */
 class INET_API Mrp: public OperationalBase, public cListener, public StringFormat::IDirectiveResolver {
-protected:
-    typedef std::map<uint16_t, int64_t> FrameSentDatabase;  // test frame sequence -> time sent
-
+public:
     enum FrameType : uint64_t {
         MC_RESERVED = 0x000001154E000000,
         MC_TEST = 0x000001154E000001,
@@ -79,6 +77,8 @@ protected:
         PT_IDLE, //Pass Through Idle: both ring ports have a link and their port states are set to FORWARDING
     };
 
+protected:
+    typedef std::map<uint16_t, int64_t> FrameSentDatabase;  // test frame sequence -> time sent
     typedef NetworkInterface::State LinkState;
 
     const static uint16_t MRP_LT = 0x88E3;

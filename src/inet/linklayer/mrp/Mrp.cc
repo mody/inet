@@ -37,6 +37,9 @@ Define_Module(Mrp);
 //TODO topologyChangeReq(double time) -> maybe rename method to scheduleTopologyChangeReq()?
 //TODO review values emitted for signals: user should be able to infer from signal name what is the value; or simply use constant "1" for signals that are emitted for events
 
+Register_Enum(Mrp::RingState, (Mrp::OPEN, Mrp::CLOSED, Mrp::UNDEFINED));
+Register_Enum(Mrp::NodeState, (Mrp::POWER_ON, Mrp::AC_STAT1, Mrp::PRM_UP, Mrp::CHK_RO, Mrp::CHK_RC, Mrp::DE_IDLE, Mrp::PT, Mrp::DE, Mrp::PT_IDLE));
+
 Mrp::Mrp() {
 }
 

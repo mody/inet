@@ -133,8 +133,8 @@ simple Mrp like IMediaRedundancy
         @signal[ringStateChanged](type="long");
         @signal[portStateChanged](type="unsigned long");
 
-        @statistic[ringState](title="Ring state"; record=vector; interpolationmode=sample-hold);
-        @statistic[nodeState](title="Node state"; record=vector; interpolationmode=sample-hold);
+        @statistic[ringState](title="Ring state"; record=vector; interpolationmode=sample-hold; enumname=inet::Mrp::RingState);
+        @statistic[nodeState](title="Node state"; record=vector; interpolationmode=sample-hold; enumname=inet::Mrp::NodeState);
 
         @statistic[testFrame](title="Testframes sent"; source="test"; record=count,vector; interpolationmode=none);
         @statistic[linkChange](title="LinkChange in us"; source="linkChange"; record=count,vector; interpolationmode=none);
