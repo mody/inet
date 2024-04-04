@@ -163,8 +163,8 @@ void Mrp::initialize(int stage) {
         noTopologyChange = par("noTopologyChange");
 
         //signals
-        ringState.configure(this, registerSignal("ringState"));
-        nodeState.configure(this, registerSignal("nodeState"));
+        ringState.addEmitCallback(this, registerSignal("ringState"));
+        nodeState.addEmitCallback(this, registerSignal("nodeState"));
 
         linkChangeSignal = registerSignal("linkChange");
         topologyChangeSignal = registerSignal("topologyChange");

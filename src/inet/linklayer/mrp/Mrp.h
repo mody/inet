@@ -40,13 +40,13 @@ protected:
         uint64_t uuid1 = 0;
     };
 
-    enum RingState : uint16_t {
+    enum RingState {
         OPEN = 0x0000,
         CLOSED = 0x0001,
         UNDEFINED = 0x0003,
     };
 
-    enum MrpRole : uint16_t {
+    enum MrpRole {
         DISABLED = 0,
         CLIENT = 1,
         MANAGER = 2,

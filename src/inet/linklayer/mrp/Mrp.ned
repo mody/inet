@@ -120,8 +120,8 @@ simple Mrp like IMediaRedundancy
 
         //TODO some statistics titles are not descriptive enough, or out of date
         @display("i=block/network2");
-        @signal[ringState](type="unsigned long");
-        @signal[nodeState](type="unsigned long");
+        @signal[ringState](type=long);
+        @signal[nodeState](type=long);
         @signal[test](type="long");
         @signal[topologyChange](type="unsigned long");
         @signal[linkChange](type="double");
@@ -130,8 +130,12 @@ simple Mrp like IMediaRedundancy
         @signal[receivedTest](type="unsigned long");
         @signal[receivedChange](type="unsigned long");
         @signal[receivedContinuityCheck](type="long");
-        @signal[ringStateChanged](type="unsigned long");
+        @signal[ringStateChanged](type="long");
         @signal[portStateChanged](type="unsigned long");
+
+        @statistic[ringState](title="Ring state"; record=vector; interpolationmode=sample-hold);
+        @statistic[nodeState](title="Node state"; record=vector; interpolationmode=sample-hold);
+
         @statistic[testFrame](title="Testframes sent"; source="test"; record=count,vector; interpolationmode=none);
         @statistic[linkChange](title="LinkChange in us"; source="linkChange"; record=count,vector; interpolationmode=none);
         @statistic[topologyChange](title="TopologyChange in us"; source="topologyChange"; record=count,vector; interpolationmode=none);
