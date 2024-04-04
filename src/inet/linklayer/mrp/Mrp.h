@@ -19,12 +19,11 @@
 namespace inet {
 
 /**
- * Base class for MRC and MRM.
+ * Implements the base part of the MRP protocol, i.e. roles MRC, MRM and MRA.
  */
-
 class INET_API Mrp: public OperationalBase, public cListener, public StringFormat::IDirectiveResolver {
 protected:
-    typedef std::map<uint16_t, int64_t> FrameSentDatabase;  // TODO what does it contain?
+    typedef std::map<uint16_t, int64_t> FrameSentDatabase;  // test frame sequence -> time sent
 
     enum FrameType : uint64_t {
         MC_RESERVED = 0x000001154E000000,
