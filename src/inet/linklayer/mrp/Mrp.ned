@@ -120,6 +120,8 @@ simple Mrp like IMediaRedundancy
 
         //TODO some statistics titles are not descriptive enough, or out of date
         @display("i=block/network2");
+        @signal[ringState](type="unsigned long");
+        @signal[nodeState](type="unsigned long");
         @signal[test](type="long");
         @signal[topologyChange](type="unsigned long");
         @signal[linkChange](type="double");

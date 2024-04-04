@@ -7,6 +7,7 @@
 #include "inet/common/lifecycle/ModuleOperations.h"
 #include "inet/common/lifecycle/OperationalBase.h"
 #include "inet/common/StringFormat.h"
+#include "inet/common/Traced.h"
 #include "inet/linklayer/common/MacAddress.h"
 #include "inet/linklayer/ethernet/common/MacForwardingTable.h"
 #include "inet/linklayer/mrp/MrpMacForwardingTable.h"
@@ -93,9 +94,9 @@ protected:
     cPar *linkDetectionDelayPar;
     cPar *processingDelayPar;
 
-    MrpRole role = DISABLED;
-    NodeState nodeState = POWER_ON;
-    RingState ringState = OPEN;
+    Traced<MrpRole> role = DISABLED;
+    Traced<NodeState> nodeState = POWER_ON;
+    Traced<RingState> ringState = OPEN;
 
     uint16_t transition = 0;
     uint16_t sequenceID = 0;
