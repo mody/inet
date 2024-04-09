@@ -1118,7 +1118,7 @@ void Mrp::setupTopologyChangeReq(simtime_t interval) {
     packet2->insertAtBack(endTlv);
     MacAddress sourceAddress2 = getPortNetworkInterface(secondaryRingPort)->getMacAddress();
     sendFrameReq(secondaryRingPort, MacAddress(MC_CONTROL), sourceAddress2, priority, MRP_LT, packet2);
-    emit(topologyChangeSignal, interval.inUnit(SIMTIME_MS));
+    emit(topologyChangeSignal, (uint64_t)interval.inUnit(SIMTIME_MS));
 }
 
 void Mrp::setupLinkChangeReq(int ringPort, LinkState linkState, simtime_t time) {
@@ -1152,7 +1152,7 @@ void Mrp::setupLinkChangeReq(int ringPort, LinkState linkState, simtime_t time) 
     packet1->insertAtBack(endTlv);
     MacAddress sourceAddress1 = getPortNetworkInterface(ringPort)->getMacAddress();
     sendFrameReq(ringPort, MacAddress(MC_CONTROL), sourceAddress1, priority, MRP_LT, packet1);
-    emit(linkChangeSignal, time.inUnit(SIMTIME_MS));
+    emit(linkChangeSignal, (double)time.inUnit(SIMTIME_MS));
 }
 
 void Mrp::testMgrNackReq(int ringPort, MrpPriority managerPrio, MacAddress sourceAddress) {
