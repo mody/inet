@@ -146,7 +146,7 @@ void MediumCanvasVisualizer::initialize(int stage)
                     spectrumFigure->setYValueFormat("%.3g");
                     spectrumFigure->setPlotSize(cFigure::Point(spectrumFigureWidth, spectrumFigureHeight));
                     spectrumFigure->refreshDisplay();
-                    networkNodeVisualization->addAnnotation(spectrumFigure, spectrumFigure->getPlotSize(), spectrumPlacementHint, spectrumPlacementPriority);
+                    networkNodeVisualization->addAnnotation(spectrumFigure, spectrumFigure->getSize(), spectrumPlacementHint, spectrumPlacementPriority);
                     spectrumFigures[networkNode->getId()] = spectrumFigure;
                 }
                 if (displaySpectrograms) {
@@ -161,7 +161,7 @@ void MediumCanvasVisualizer::initialize(int stage)
                     spectrogramFigure->invertYAxis();
                     spectrogramFigure->setPlotSize(cFigure::Point(spectrogramFigureWidth, spectrogramFigureHeight), cFigure::Point(spectrogramPixmapWidth, spectrogramPixmapHeight));
                     spectrogramFigure->refreshDisplay();
-                    networkNodeVisualization->addAnnotation(spectrogramFigure, spectrogramFigure->getPlotSize(), spectrogramPlacementHint, spectrogramPlacementPriority);
+                    networkNodeVisualization->addAnnotation(spectrogramFigure, spectrogramFigure->getSize(), spectrogramPlacementHint, spectrogramPlacementPriority);
                     spectrogramFigures[networkNode->getId()] = spectrogramFigure;
                 }
                 if (displayPowerDensityMaps || displaySpectrums || displaySpectrograms)
