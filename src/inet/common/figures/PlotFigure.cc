@@ -326,7 +326,8 @@ void PlotFigure::layout()
 
     Rectangle b = backgroundFigure->getBounds();
     double fontSize = xTicks.size() > 0 && xTicks[0].number ? xTicks[0].number->getFont().pointSize : 12;
-    labelFigure->setPosition(Point(b.getCenter().x, b.y + b.height + fontSize * LABEL_Y_DISTANCE_FACTOR + labelOffset));
+    double xTickHeight = xTicks.size() > 0 ? xTicks[0].number->getBounds().height : std::isnan(xTickSize) ? 0 : 12;
+    labelFigure->setPosition(Point(b.getCenter().x, b.y + b.height + xTickHeight * LABEL_Y_DISTANCE_FACTOR + labelOffset));
     xAxisLabelFigure->setPosition(Point(b.x + b.width / 2, b.y - 5));
     yAxisLabelFigure->setPosition(Point(b.x - 5, b.y + b.height / 2));
 
