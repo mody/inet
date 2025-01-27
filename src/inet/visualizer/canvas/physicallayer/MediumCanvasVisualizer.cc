@@ -103,7 +103,7 @@ void MediumCanvasVisualizer::initialize(int stage)
             mainPowerDensityMapFigure->setMinY(minPosition.y);
             mainPowerDensityMapFigure->setMaxX(maxPosition.x);
             mainPowerDensityMapFigure->setMaxY(maxPosition.y);
-            mainPowerDensityMapFigure->setBounds(cFigure::Rectangle(mainPowerDensityMapMinX, mainPowerDensityMapMinY, width, height));
+            mainPowerDensityMapFigure->setPlotBounds(cFigure::Rectangle(mainPowerDensityMapMinX, mainPowerDensityMapMinY, width, height));
             mainPowerDensityMapFigure->setPlotSize(cFigure::Point(width, height), cFigure::Point(width * mainPowerDensityMapPixmapDensity, height * mainPowerDensityMapPixmapDensity));
             cCanvas *canvas = visualizationTargetModule->getCanvas();
             canvas->addFigure(mainPowerDensityMapFigure, 0);

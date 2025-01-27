@@ -79,7 +79,7 @@ class INET_API HeatMapPlotFigure : public cGroupFigure
 
     const Point getSize() const { return getBounds().getSize(); }
     const Rectangle& getBounds() const;
-    void setBounds(const Rectangle& rect);
+    void setPlotBounds(const Rectangle& rect);
 
     double getXTickSize() const;
     void setXTickSize(double size);

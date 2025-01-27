@@ -172,10 +172,10 @@ const cFigure::Rectangle& HeatMapPlotFigure::getBounds() const
     return bounds;
 }
 
-void HeatMapPlotFigure::setBounds(const Rectangle& rect)
+void HeatMapPlotFigure::setPlotBounds(const Rectangle& rect)
 {
-    const auto& backgroundBounds = backgroundFigure->getBounds();
-    backgroundFigure->setBounds(Rectangle(backgroundBounds.x + rect.x - bounds.x, backgroundBounds.y + rect.y - bounds.y, rect.width - (bounds.width - backgroundBounds.width), rect.height - (bounds.height - backgroundBounds.height)));
+    bounds = rect;
+    backgroundFigure->setBounds(rect);
     pixmapFigure->setPosition(Point(rect.x, rect.y));
     pixmapFigure->setSize(rect.width, rect.height);
     pixmapFigure->setPixmapSize(rect.width, rect.height, INIT_BACKGROUND_COLOR, 1);
@@ -323,7 +323,7 @@ void HeatMapPlotFigure::parse(cProperty *property)
 
     const char *s;
 
-    setBounds(parseBounds(property, getBounds()));
+    setPlotBounds(parseBounds(property, getBounds()));
 
     if ((s = property->getValue(PKEY_X_TICK_SIZE)) != nullptr)
         setXTickSize(atoi(s));
