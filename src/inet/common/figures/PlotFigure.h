@@ -79,7 +79,9 @@ class INET_API PlotFigure : public cGroupFigure, public inet::IIndicatorFigure
 
     virtual const Point getSize() const override { return getBounds().getSize(); }
     const Rectangle& getBounds() const;
-    void setBounds(const Rectangle& rect);
+
+    // set plot area bounds
+    void setPlotBounds(const Rectangle& rect);
 
     const Color& getBackgroundColor() const;
     void setBackgroundColor(const Color& color);

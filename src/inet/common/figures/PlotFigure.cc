@@ -73,10 +73,10 @@ const cFigure::Rectangle& PlotFigure::getBounds() const
     return bounds;
 }
 
-void PlotFigure::setBounds(const Rectangle& rect)
+void PlotFigure::setPlotBounds(const Rectangle& rect)
 {
-    const auto& backgroundBounds = backgroundFigure->getBounds();
-    backgroundFigure->setBounds(Rectangle(backgroundBounds.x + rect.x - bounds.x, backgroundBounds.y + rect.y - bounds.y, rect.width - (bounds.width - backgroundBounds.width), rect.height - (bounds.height - backgroundBounds.height)));
+    bounds = rect;
+    backgroundFigure->setBounds(rect);
     invalidLayout = true;
 }
 
@@ -236,7 +236,7 @@ void PlotFigure::parse(cProperty *property)
 
     const char *s;
 
-    setBounds(parseBounds(property, getBounds()));
+    setPlotBounds(parseBounds(property, getBounds()));
 
     if ((s = property->getValue(PKEY_BACKGROUND_COLOR)) != nullptr)
         setBackgroundColor(parseColor(s));
