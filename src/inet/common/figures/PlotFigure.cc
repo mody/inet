@@ -7,6 +7,7 @@
 
 #include "inet/common/figures/PlotFigure.h"
 
+#include "inet/common/figures/FigureUtil.h"
 #include "inet/common/figures/InstrumentUtil.h"
 
 namespace inet {
@@ -325,7 +326,7 @@ void PlotFigure::layout()
     redrawYTicks();
 
     Rectangle b = backgroundFigure->getBounds();
-    double fontSize = xTicks.size() > 0 && xTicks[0].number ? xTicks[0].number->getFont().pointSize : 12;
+    double fontSize = xTicks.size() > 0 && xTicks[0].number ? getFontPointSize(xTicks[0].number->getFont()) : 12;
     double xTickHeight = xTicks.size() > 0 ? xTicks[0].number->getBounds().height : std::isnan(xTickSize) ? 0 : 12;
     labelFigure->setPosition(Point(b.getCenter().x, b.y + b.height + xTickHeight * LABEL_Y_DISTANCE_FACTOR + labelOffset));
     xAxisLabelFigure->setPosition(Point(b.x + b.width / 2, b.y - 5));
@@ -356,7 +357,7 @@ void PlotFigure::redrawYTicks()
     int numTicks = std::isfinite(yTickSize) ? std::abs(maxY - minY) / yTickSize + 1 : 0;
 
     double valueTickYposAdjust[2] = { 0, 0 };
-    int fontSize = labelFigure->getFont().pointSize;
+    int fontSize = getFontPointSize(labelFigure->getFont());
     if (yTicks.size() == 1) {
         valueTickYposAdjust[0] = -(fontSize / 2);
         valueTickYposAdjust[1] = fontSize / 2;

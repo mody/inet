@@ -6,6 +6,7 @@
 
 
 #include "inet/common/figures/CounterFigure.h"
+#include "inet/common/figures/FigureUtil.h"
 
 #include "inet/common/INETUtils.h"
 
@@ -309,8 +310,8 @@ cFigure::Point CounterFigure::calculateRealPos(const Point& pos)
 
 void CounterFigure::calculateBounds()
 {
-    double rectWidth = getDigitFont().pointSize * DIGIT_WIDTH_PERCENT;
-    double rectHeight = getDigitFont().pointSize * DIGIT_HEIGHT_PERCENT;
+    double rectWidth = getFontPointSize(getDigitFont()) * DIGIT_WIDTH_PERCENT;
+    double rectHeight = getFontPointSize(getDigitFont()) * DIGIT_HEIGHT_PERCENT;
 
     Rectangle bounds = backgroundFigure->getBounds();
     backgroundFigure->setBounds(Rectangle(0, 0, 2 * PADDING + (rectWidth + DIGIT_PADDING) * digits.size(), rectHeight + 2 * PADDING));
@@ -381,8 +382,8 @@ void CounterFigure::layout()
     bounds.x += PADDING + DIGIT_PADDING / 2;
 
     for (uint32_t i = 0; i < digits.size(); ++i) {
-        double rectWidth = getDigitFont().pointSize * DIGIT_WIDTH_PERCENT;
-        double rectHeight = getDigitFont().pointSize * DIGIT_HEIGHT_PERCENT;
+        double rectWidth = getFontPointSize(getDigitFont()) * DIGIT_WIDTH_PERCENT;
+        double rectHeight = getFontPointSize(getDigitFont()) * DIGIT_HEIGHT_PERCENT;
         double x = bounds.x + (rectWidth + DIGIT_PADDING) * i;
         double y = bounds.y + PADDING;
 

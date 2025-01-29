@@ -8,6 +8,7 @@
 #include "inet/common/figures/GaugeFigure.h"
 
 #include "inet/common/INETUtils.h"
+#include "inet/common/figures/FigureUtil.h"
 
 namespace inet {
 
@@ -322,7 +323,7 @@ void GaugeFigure::setNumberGeometry(cTextFigure *number, int index)
 
     double distanceToBorder = tickFigures[0]->getStart().distanceTo(tickFigures[0]->getEnd());
     number->setFont(cFigure::Font("", getBounds().width * FONT_SIZE_PERCENT, 0));
-    Point textPos = Point(getBounds().x + distanceToBorder + number->getFont().pointSize, getBounds().getCenter().y);
+    Point textPos = Point(getBounds().x + distanceToBorder + getFontPointSize(number->getFont()), getBounds().getCenter().y);
     number->setPosition(textPos);
 
     Transform trans;
