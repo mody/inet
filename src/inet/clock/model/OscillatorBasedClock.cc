@@ -72,6 +72,13 @@ void OscillatorBasedClock::initialize(int stage)
     }
 }
 
+void OscillatorBasedClock::checkClockEvent(const ClockEvent *event)
+{
+    ASSERT(event->getArrivalTime() >= simTime());
+//    ASSERT(compareClockTimes(event->getArrivalClockTime(), getClockTime()) >= 0);
+//    ASSERT(compareSimulationTimes(event->getArrivalTime(), computeSimTimeFromClockTime(event->getArrivalClockTime())) == 0);
+}
+
 clocktime_t OscillatorBasedClock::computeClockTimeFromSimTime(simtime_t t) const
 {
     ASSERT(t >= simTime());
@@ -83,7 +90,7 @@ clocktime_t OscillatorBasedClock::computeClockTimeFromSimTime(simtime_t t) const
 
 simtime_t OscillatorBasedClock::computeSimTimeFromClockTime(clocktime_t t) const
 {
-    ASSERT(t >= getClockTime());
+    ASSERT(compareClockTimes(t, getClockTime()) >= 0);
     return oscillator->getComputationOrigin() +
            oscillator->computeIntervalForTicks((t - originClockTime).dbl() / oscillator->getNominalTickLength() / (1 + getOscillatorCompensation().get<unit>()) +
                                                oscillator->computeTicksForInterval(originSimulationTime - oscillator->getComputationOrigin()));
@@ -94,6 +101,7 @@ void OscillatorBasedClock::scheduleClockEventAt(clocktime_t time, ClockEvent *ev
     int64_t roundedTime = roundingFunction(time.raw(), oscillator->getNominalTickLength().raw());
     ClockBase::scheduleClockEventAt(ClockTime().setRaw(roundedTime), event);
     events.push_back(event);
+    checkClockEvent(event);
 }
 
 void OscillatorBasedClock::scheduleClockEventAfter(clocktime_t delay, ClockEvent *event)
@@ -101,6 +109,7 @@ void OscillatorBasedClock::scheduleClockEventAfter(clocktime_t delay, ClockEvent
     int64_t roundedDelay = roundingFunction(delay.raw(), oscillator->getNominalTickLength().raw());
     ClockBase::scheduleClockEventAfter(ClockTime().setRaw(roundedDelay), event);
     events.push_back(event);
+    checkClockEvent(event);
 }
 
 ClockEvent *OscillatorBasedClock::cancelClockEvent(ClockEvent *event)
@@ -135,6 +144,8 @@ void OscillatorBasedClock::receiveSignal(cComponent *source, int signal, cObject
         // NOTE: the origin clock must be set first
         originClockTime = getClockTime();
         originSimulationTime = simTime();
+        for (auto event : events)
+            checkClockEvent(event);
     }
     else if (signal == IOscillator::postOscillatorStateChangedSignal) {
         simtime_t currentSimTime = simTime();
@@ -154,6 +165,7 @@ void OscillatorBasedClock::receiveSignal(cComponent *source, int signal, cObject
                 cContextSwitcher contextSwitcher(targetModule);
                 targetModule->rescheduleAt(arrivalSimTime, event);
             }
+            checkClockEvent(event);
         }
         emit(timeChangedSignal, CLOCKTIME_AS_SIMTIME(getClockTime()));
     }

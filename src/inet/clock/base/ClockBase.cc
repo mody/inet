@@ -98,6 +98,7 @@ void ClockBase::handleClockEvent(ClockEvent *msg)
 {
     clockEventTime = msg->getArrivalClockTime();
     msg->setClock(nullptr);
+    ASSERT(compareClockTimes(msg->getArrivalClockTime(), getClockTime()) == 0);
     msg->callBaseExecute();
     clockEventTime = -1;
 }

@@ -14,6 +14,32 @@ namespace inet {
 
 class ClockBase;
 
+static int compareClockTimes(clocktime_t c1, clocktime_t c2, int64_t d = 100) // TODO: make this 1 or even 0?
+{
+    std::cout << "compareClockTimes(" << c1 << ", " << c2 << ")" << std::endl;
+    if (llabs(c1.raw() - c2.raw()) <= d)
+        return 0;
+    else if (c1.raw() < c2.raw())
+        return -1;
+    else if (c1.raw() > c2.raw())
+        return 1;
+    else
+        throw cRuntimeError("Unreachable code");
+}
+
+static int compareSimulationTimes(simtime_t c1, simtime_t c2, int64_t d = 100) // TODO: make this 1 or even 0?
+{
+    std::cout << "compareSimulationTimes(" << c1 << ", " << c2 << ")" << std::endl;
+    if (llabs(c1.raw() - c2.raw()) <= d)
+        return 0;
+    else if (c1.raw() < c2.raw())
+        return -1;
+    else if (c1.raw() > c2.raw())
+        return 1;
+    else
+        throw cRuntimeError("Unreachable code");
+}
+
 class INET_API ClockEvent : public ClockEvent_Base
 {
   friend ClockBase;

@@ -59,6 +59,8 @@ simtime_t SettableClock::handleOverdueClockEvent(ClockEvent *event, simtime_t t)
 void SettableClock::setClockTime(clocktime_t newClockTime, ppm oscillatorCompensation, bool resetOscillator)
 {
     Enter_Method("setClockTime");
+    for (auto event : events)
+        checkClockEvent(event);
     clocktime_t oldClockTime = getClockTime();
     if (newClockTime != oldClockTime) {
         emit(timeChangedSignal, oldClockTime.asSimTime());
@@ -74,9 +76,12 @@ void SettableClock::setClockTime(clocktime_t newClockTime, ppm oscillatorCompens
         ASSERT(newClockTime == getClockTime());
         clocktime_t clockDelta = newClockTime - oldClockTime;
         for (auto event : events) {
-            if (event->getRelative())
-                // NOTE: the simulation time of event execution is not affected
+            if (event->getRelative()) {
                 event->setArrivalClockTime(event->getArrivalClockTime() + clockDelta);
+                cSimpleModule *targetModule = check_and_cast<cSimpleModule *>(event->getArrivalModule());
+                cContextSwitcher contextSwitcher(targetModule);
+                targetModule->rescheduleAt(computeSimTimeFromClockTime(event->getArrivalClockTime()), event);
+            }
             else {
                 clocktime_t arrivalClockTime = event->getArrivalClockTime();
                 bool isOverdue = arrivalClockTime < newClockTime;
@@ -89,6 +94,7 @@ void SettableClock::setClockTime(clocktime_t newClockTime, ppm oscillatorCompens
                     targetModule->rescheduleAt(arrivalSimTime, event);
                 }
             }
+            checkClockEvent(event);
         }
         emit(timeChangedSignal, newClockTime.asSimTime());
     }
