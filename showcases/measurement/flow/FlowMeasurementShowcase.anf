@@ -7,7 +7,7 @@
         <input pattern="results/Basic-#0.vec"/>
     </inputs>
     <charts>
-        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="1394457060" name="Queueing time for all flows in switch1" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
+        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="1764398905" name="Queueing time for all flows in switch1" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # get chart properties
@@ -660,10 +660,10 @@ Show over_underflow cell?
             <property name="xaxis_max" value=""/>
             <property name="image_export_width" value="9"/>
             <property name="ordering_regex_list" value=""/>
-            <property name="sorting" value="true"/>
+            <property name="sorting" value="false"/>
             <property name="secondary_ordering_regex_list" value=""/>
         </chart>
-        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="1914349329" name="Queueing time for all flows in switch2" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
+        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="326776816" name="Queueing time for all flows in switch2" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # get chart properties
@@ -681,9 +681,6 @@ except results.ResultQueryError as e:
 
 if df.empty:
     raise chart.ChartScriptError("The result filter returned no data.")
-
-# convert to ms
-df['binedges'] = df['binedges'] * 1000
 
 # plot
 utils.add_legend_labels(df, props)
@@ -1316,10 +1313,10 @@ Show over_underflow cell?
             <property name="legend_format" value="$name"/>
             <property name="simplify" value="false"/>
             <property name="ordering_regex_list" value=""/>
-            <property name="sorting" value="true"/>
+            <property name="sorting" value="false"/>
             <property name="secondary_ordering_regex_list" value=""/>
         </chart>
-        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="1818842766" name="Total queueing time for flows ending in server1" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
+        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="1451283691" name="Total queueing time for flows ending in server1" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # get chart properties
@@ -1975,7 +1972,7 @@ Show over_underflow cell?
             <property name="sorting" value="true"/>
             <property name="secondary_ordering_regex_list" value=""/>
         </chart>
-        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="850079572" name="Total queueing time for flows ending in server2" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
+        <chart createdWith="" icon="icons/full/obj/histogramchart.png" id="2074699026" name="Total queueing time for flows ending in server2" resultTypes="" template="histogramchart_native" type="HISTOGRAM">
             <script><![CDATA[from omnetpp.scave import results, chart, utils
 
 # get chart properties
