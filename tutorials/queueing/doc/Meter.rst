@@ -15,6 +15,7 @@ and if the rate of packets is higher than a predefined threshold, then packets a
 dropped by the :ned:`StatisticalRateLimiter`.
 
 .. figure:: media/Meter.png
+   :width: 90%
    :align: center
 
 .. literalinclude:: ../QueueingTutorial.ned

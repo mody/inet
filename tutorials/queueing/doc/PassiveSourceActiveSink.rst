@@ -10,6 +10,7 @@ source also has a configurable providing interval, which limits the times at whi
 can be popped from the module.
 
 .. figure:: media/PassiveSourceActiveSink.png
+   :width: 60%
    :align: center
 
 .. literalinclude:: ../QueueingTutorial.ned

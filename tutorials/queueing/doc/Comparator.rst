@@ -19,6 +19,7 @@ this happens, packets will be ordered in the queue, so the collector will receiv
 a series of ordered sequences.
 
 .. figure:: media/Comparator.png
+   :width: 90%
    :align: center
 
 .. literalinclude:: ../QueueingTutorial.ned
@@ -35,18 +36,22 @@ a series of ordered sequences.
    first without, then with the comparator function:
 
    .. figure:: media/nocomparator.png
-         :align: center
+      :width: 90%
+      :align: center
 
    .. figure:: media/comparator.png
-         :align: center
+      :width: 90%
+      :align: center
 
 The following screenshot demonstrates the queue's contents at the end of the simulation
 without the comparator function:
 
 .. figure:: media/nocomparator.png
+   :width: 90%
    :align: center
 
 And this one using the comparator function (head at the top, tail at the bottom):
 
 .. figure:: media/withcomparator.png
+   :width: 90%
    :align: center

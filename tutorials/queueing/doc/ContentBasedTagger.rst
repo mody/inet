@@ -11,6 +11,7 @@ to attach a hop limit tag to 1-byte packets. Packets are consumed by a passive p
 (:ned:`PassivePacketSink`).
 
 .. figure:: media/ContentBasedTagger.png
+   :width: 80%
    :align: center
 
 .. literalinclude:: ../QueueingTutorial.ned

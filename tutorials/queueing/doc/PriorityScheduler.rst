@@ -11,6 +11,7 @@ An active packet sink (:ned:`ActivePacketSink`) pops packets from the scheduler,
 pops packets from one of the queues in a prioritized way, favoring the first queue.
 
 .. figure:: media/PriorityScheduler.png
+   :width: 90%
    :align: center
 
 .. literalinclude:: ../QueueingTutorial.ned

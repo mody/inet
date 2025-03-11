@@ -22,9 +22,11 @@ Packets are collected at random intervals by
 an active packet sink (:ned:`ActivePacketSink`).
 
 .. figure:: media/CompoundQueue.png
+   :width: 70%
    :align: center
 
 .. figure:: media/CompoundQueue_Queue.png
+   :width: 90%
    :align: center
 
 .. literalinclude:: ../QueueingTutorial.ned
