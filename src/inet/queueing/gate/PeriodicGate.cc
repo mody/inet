@@ -148,8 +148,9 @@ bool PeriodicGate::canPacketFlowThrough(Packet *packet) const
         return false;
     else {
         if (enableImplicitGuardBand) {
+            EV_INFO << "Checking canPacketFlowThrough " << getClockTime() << ", " << getArrivalClockTime(changeTimer) << std::endl;
             clocktime_t flowEndTime = getClockTime() + ((packet->getDataLength() + extraLength) / bitrate).get<s>() + SIMTIME_AS_CLOCKTIME(extraDuration);
-            return !changeTimer->isScheduled() || flowEndTime <= getArrivalClockTime(changeTimer);
+            return isScheduledClockEvent(changeTimer) || flowEndTime <= getArrivalClockTime(changeTimer);
         }
         else
             return PacketGateBase::canPacketFlowThrough(packet);
