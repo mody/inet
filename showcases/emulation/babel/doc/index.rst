@@ -216,13 +216,38 @@ Sources: :download:`omnetpp.ini <../omnetpp.ini>`, :download:`BabelShowcase.ned 
 Try It Yourself
 ---------------
 
-First, install INET and OMNeT++. Then, start the IDE by typing
+TODO you need setcap
+
+If you already have INET and OMNeT++ installed, start the IDE by typing
 ``omnetpp``, import the INET project into the IDE, then navigate to the
 ``inet/showcases/emulation/babel`` folder in the `Project Explorer`. There, you can view
 and edit the showcase files, run simulations, and analyze results.
 
-Currently, `opp_env <https://omnetpp.org/opp_env>`__-based installation is not
-available for the emulation showcases.
+Otherwise, there is an easy way to install INET and OMNeT++ using `opp_env
+<https://omnetpp.org/opp_env>`__, and run the simulation interactively.
+Ensure that ``opp_env`` is installed on your system, then execute:
+
+.. code-block:: bash
+
+    $ opp_env run inet-4.5 --init -w inet-workspace --install --no-isolated --build-modes=release --options=inet:full --chdir \
+       -c 'cd inet-4.5.*/showcases/emulation/babel && sudo setcap cap_sys_admin=ep $(which opp_run_release) && ./Setup.sh && ./Run.sh && ./Teardown.sh'
+
+This command creates an ``inet-workspace`` directory, installs the appropriate
+versions of INET and OMNeT++ within it, and launches the ``inet`` command in the
+showcase directory for interactive simulation.
+
+Alternatively, for a more hands-on experience, you can first set up the
+workspace and then open an interactive shell:
+
+.. code-block:: bash
+
+    $ opp_env install --init -w inet-workspace inet-4.5 --build-modes=release --options=inet:full
+    $ cd inet-workspace
+    $ sudo setcap cap_sys_admin+ep omnetpp-*/bin/opp_run_release
+    $ opp_env shell --options=inet:full
+
+Inside the shell, start the IDE by typing ``omnetpp``, import the INET project,
+then start exploring.
 
 
 Discussion
