@@ -97,6 +97,7 @@ IP addresses to them:
 
 .. literalinclude:: ../Setup.sh
    :language: bash
+   :start-at: create network namespaces
 
 The script assigns the following IP addresses:
 
