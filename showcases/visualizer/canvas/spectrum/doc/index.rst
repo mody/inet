@@ -319,6 +319,8 @@ Also, the resolution of the heatmap is increased to allow zooming in without too
    :end-at: mainPowerDensityMapPixmapDensity
    :language: ini
 
+.. note:: Decrease the pixmap density if the simulation is running slowly or running without OpenMP
+
 In this simulation, all hosts operate on the same Wifi channel:
 
 .. literalinclude:: ../omnetpp.ini

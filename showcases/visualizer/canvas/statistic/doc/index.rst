@@ -33,7 +33,8 @@ and displays the statistic selected with the :par:`statisticName`
 parameter. It displays the statistic of modules that match the
 expression of the :par:`sourceFilter` parameter, at the network node that
 contains the modules. By default, the :par:`statisticName` is the same as
-the :par:`signalName`.
+the :par:`signalName`. The :par:`unit` parameter can be used to specify the
+unit (or units) to display the statistic in; by default, it is the statistic's unit.
 
 Alternatively, the :par:`statisticExpression` parameter can be used instead of :par:`statisticName`.
 The :par:`statisticExpression` parameter can specify an expression with OMNeT++'s ``@statistic`` syntax.
@@ -49,9 +50,7 @@ following directives:
 -  ``%u``: unit of statistic
 
 The default setting for the format string is ``"%n %v %u"``, i.e. it
-displays the statistic name, followed by the value and the unit. The
-:par:`unit` parameter selects what unit to display the value in. By
-default, it is the unit of the statistic.
+displays the statistic name, followed by the value and the unit.
 
 Displaying round trip time of ping packets
 ------------------------------------------
