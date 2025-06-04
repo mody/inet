@@ -17,8 +17,12 @@ using namespace inet::units::values;
 #define MAX_PACKETBURST    13
 
 const B GIGABIT_MAX_BURST_BYTES          = B(8192); /* don't start new frame after 8192 or more bytes already transmitted */
-const B MAX_ETHERNET_DATA_BYTES          = B(1500); /* including LLC, SNAP etc headers */
-const B MAX_ETHERNET_FRAME_BYTES         = B(1526); /* excludes preamble and SFD */
+
+// const B MAX_ETHERNET_DATA_BYTES          = B(1500); /* including LLC, SNAP etc headers */
+// const B MAX_ETHERNET_FRAME_BYTES         = B(1526); /* excludes preamble and SFD */
+const B MAX_ETHERNET_DATA_BYTES          = B(65535-26); /* including LLC, SNAP etc headers */
+const B MAX_ETHERNET_FRAME_BYTES         = B(65535); /* excludes preamble and SFD */
+
 const B MIN_ETHERNET_FRAME_BYTES         = B(64); /* excludes preamble and SFD */
 const B GIGABIT_MIN_FRAME_BYTES_WITH_EXT = B(512); /* excludes preamble and SFD, but includes 448 byte extension */
 const b INTERFRAME_GAP_BITS              = b(96);
